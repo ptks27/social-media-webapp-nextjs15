@@ -2,6 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
+@import "~stream-chat-react/dist/css/v2/index.css";
 
 @layer base {
   :root {
@@ -30,7 +31,6 @@
     --chart-3: 197 37% 24%;
     --chart-4: 43 74% 66%;
     --chart-5: 27 87% 67%;
-    
   }
 
   .dark {
@@ -58,15 +58,59 @@
     --chart-3: 30 80% 55%;
     --chart-4: 280 65% 60%;
     --chart-5: 340 75% 55%;
+
+    /* เพิ่มการตั้งค่าสีของข้อความในฟองแชทของผู้ใช้เองให้เป็นสีขาวในธีม dark */
+    --str-chat__own-message-text-color: hsl(0, 0%, 100%) !important;
   }
 }
-
 
 @layer base {
   * {
     @apply border-border;
   }
+
   body {
     @apply bg-background text-foreground;
   }
+}
+
+.str-chat {
+  --str-chat__font-family: inherit;
+  --str-chat__primary-color: theme(colors.primary.DEFAULT);
+  --str-chat__on-primary-color: theme(colors.primary.foreground);
+  --str-chat__active-primary-color: theme(colors.primary.foreground);
+  --str-chat__primary-color-low-emphasis: color-mix(in hsl,
+      hsl(var(--primary)) 10%,
+      transparent);
+  --str-chat__background-color: theme(colors.card.DEFAULT);
+  --str-chat__secondary-background-color: theme(colors.card.DEFAULT);
+  --str-chat__message-textarea-background-color: theme(colors.background);
+  --str-chat__channel-preview-active-background-color: theme(colors.accent.DEFAULT);
+  --str-chat__channel-preview-hover-background-color: var(--str-chat__channel-preview-active-background-color);
+  --str-chat__secondary-surface-color: theme(colors.muted.DEFAULT);
+  --str-chat__own-message-bubble-color: theme(colors.primary.foreground);
+  --str-chat__primary-surface-color: theme(colors.primary.DEFAULT);
+  --str-chat__primary-surface-color-low-emphasis: var(--str-chat__primary-color-low-emphasis);
+  --str-chat__disabled-color: theme(colors.muted.DEFAULT);
+  --str-chat__cta-button-border-radius: var(--radius);
+
+  /* เพิ่มการตั้งค่าสีของข้อความในฟองแชทของผู้ใช้เอง */
+  --str-chat__own-message-text-color: hsl(0, 0%, 100%) !important;
+}
+
+/* บังคับให้ข้อความของผู้ใช้เองเป็นสีขาว */
+.str-chat__message--me .str-chat__message-text {
+  color: hsl(0, 0%, 100%) !important;
+}
+
+.str-chat-channel-list {
+  border-right: none;
+}
+
+.str-chat__channel-list-react .str-chat__channel-list-messenger-react {
+  padding-bottom: 0;
+}
+
+.str-chat__channel-search-bar-button--exit-search {
+  display: none;
 }

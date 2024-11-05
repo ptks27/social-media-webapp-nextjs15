@@ -41,15 +41,18 @@ function LinkifyHashtag({ children }: LinkifyProps) {
   return (
     <LinkIt
       regex={/(#[\u0E00-\u0E7Fa-zA-Z0-9_]+)/}
-      component={(match, key) => (
-        <Link
-          key={key}
-          href={`/hashtag/${match.slice(1)}`}
-          className="text-blue-200 hover:underline"
-        >
-          {match}
-        </Link>
-      )}
+      component={(match, key) => {
+        const tag = match.slice(1);
+        return (
+          <Link
+            key={key}
+            href={`/search?q=%23${encodeURIComponent(tag)}`}
+            className="text-blue-200 hover:underline"
+          >
+            {match}
+          </Link>
+        );
+      }}
     >
       {children}
     </LinkIt>
